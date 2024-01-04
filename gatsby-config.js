@@ -96,4 +96,5 @@ module.exports = {
       },
     },
   ],
+  pathPrefix: "/index.js",
 }
