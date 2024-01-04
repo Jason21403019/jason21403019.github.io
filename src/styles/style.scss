@@ -1,0 +1,22 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: hsl(0, 0%, 93%);
+  list-style: none;
+  font-family: "Libre Baskerville", serif;
+}
+
+// .h1 {
+//   font-size: 5rem;
+//   color: aquamarine;
+// }
+div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .blog_title {
+    font-size: 3rem;
+  }
+}
