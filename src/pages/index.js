@@ -23,7 +23,7 @@ export const query = graphql`
   query {
     allMarkdownRemark(
       sort: { fields: [frontmatter___date], order: DESC }
-      filter: { fileAbsolutePath: { regex: "/my-first-post.md/" } }
+      filter: { fileAbsolutePath: { regex: "/MyFirstPage.md/" } }
     ) {
       edges {
         node {
