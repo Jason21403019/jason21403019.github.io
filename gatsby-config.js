@@ -64,6 +64,8 @@
 // }
 
 module.exports = {
+  pathPrefix: "/my-blog",
+
   siteMetadata: {
     title: "My Blog",
     description: "A simple Gatsby blog",
@@ -96,5 +98,4 @@ module.exports = {
       },
     },
   ],
-  pathPrefix: "/my-blog",
 }
