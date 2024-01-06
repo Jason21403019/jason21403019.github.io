@@ -97,5 +97,12 @@ module.exports = {
         display: "swap",
       },
     },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `public`,
+        path: `${__dirname}/public/`,
+      },
+    },
   ],
 }
