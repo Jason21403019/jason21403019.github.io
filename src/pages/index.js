@@ -15,16 +15,6 @@ export default ({ data }) => (
         </li>
       ))}
     </ul>
-    <h2>Public Files</h2>
-    <ul>
-      {data.allFile.nodes.map(file => (
-        <li key={file.name}>
-          <a href={file.publicURL} target="_blank" rel="noopener noreferrer">
-            {file.name}
-          </a>
-        </li>
-      ))}
-    </ul>
     <But />
   </div>
 )
@@ -43,12 +33,6 @@ export const query = graphql`
             slug
           }
         }
-      }
-    }
-    allFile(filter: { sourceInstanceName: { eq: "public" } }) {
-      nodes {
-        name
-        publicURL
       }
     }
   }
