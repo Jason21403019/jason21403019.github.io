@@ -64,7 +64,7 @@
 // }
 
 module.exports = {
-  pathPrefix: "/my-blog/",
+  pathPrefix: "/my-blog",
 
   siteMetadata: {
     title: "My Blog",
@@ -101,7 +101,7 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `public`,
-        path: `${__dirname}/public/page-data/index`,
+        path: `${__dirname}/public/page-data/index.html`,
       },
     },
   ],
