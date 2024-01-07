@@ -101,7 +101,7 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `public`,
-        path: `${__dirname}/public/`,
+        path: `${__dirname}/public/page-data/index`,
       },
     },
   ],
