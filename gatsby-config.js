@@ -67,7 +67,7 @@ module.exports = {
   // pathPrefix: "/my-blog",
 
   siteMetadata: {
-    title: "My Blog",
+    title: "Jason'Blog",
     description: "A simple Gatsby blog",
   },
   plugins: [
