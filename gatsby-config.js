@@ -74,7 +74,7 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `posts`,
-        path: `${__dirname}/src/posts/`,
+        path: `/src/posts/`,
       },
     },
     `gatsby-transformer-remark`,
@@ -100,7 +100,7 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `public`,
-        path: `${__dirname}/public/index.html`,
+        path: `/public/index.html`,
       },
     },
   ],
