@@ -64,12 +64,11 @@
 // }
 
 module.exports = {
-  // pathPrefix: "/my-blog",
-
+  pathPrefix: "Jason21403019.github.io",
   siteMetadata: {
-    title: "Jason'Blog",
-    description: "A simple Gatsby blog",
+    siteUrl: "https://jason21403019.github.io/",
   },
+
   plugins: [
     {
       resolve: `gatsby-source-filesystem`,
