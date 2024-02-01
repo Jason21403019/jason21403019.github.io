@@ -66,7 +66,7 @@
 module.exports = {
   pathPrefix: "Jason21403019.github.io",
   siteMetadata: {
-    siteUrl: "https://jason21403019.github.io/",
+    siteUrl: "https://jason21403019.github.io/src/posts/MyFirstPage.md",
   },
 
   plugins: [
