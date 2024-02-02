@@ -64,7 +64,7 @@
 // }
 
 module.exports = {
-  pathPrefix: `/jason21403019.github.io`,
+  pathPrefix: `/`,
   siteMetadata: {
     title: `jason21403019.github.io`,
     author: "Jason Chang",
