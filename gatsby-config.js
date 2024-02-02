@@ -64,8 +64,9 @@
 // }
 
 module.exports = {
-  pathPrefix: "/Jason21403019.github.io",
+  pathPrefix: `jason21403019.github.io`,
   siteMetadata: {
+    title: `jason21403019.github.io`,
     siteUrl: "https://jason21403019.github.io/",
   },
 
@@ -100,7 +101,7 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `public`,
-        path: `/public/index.html`,
+        path: `./public/index.html`,
       },
     },
   ],
