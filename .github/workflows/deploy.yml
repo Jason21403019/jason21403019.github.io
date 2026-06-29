@@ -1,0 +1,41 @@
+name: Deploy to GitHub Pages
+
+on:
+  # 推到 main 分支就自動部署
+  push:
+    branches: [main]
+  # 也可在 GitHub 網站手動觸發
+  workflow_dispatch:
+
+# 部署到 GitHub Pages 所需權限
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 同時間只跑一個部署，不取消進行中的
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Build with Astro
+        uses: withastro/action@v3
+        # withastro/action 會自動安裝相依套件、執行 astro build
+        # 並上傳 dist/ 作為 Pages 部署用的 artifact
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

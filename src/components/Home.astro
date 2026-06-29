@@ -1,0 +1,80 @@
+---
+import { getCollection } from 'astro:content';
+import ProjectSection from './ProjectSection.astro';
+import { useTranslations, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const all = await getCollection('projects');
+
+// 排序：精選優先，再依 order，最後依標題
+const byOrder = (a: typeof all[number], b: typeof all[number]) => {
+  if (a.data.featured !== b.data.featured) return a.data.featured ? -1 : 1;
+  if (a.data.order !== b.data.order) return a.data.order - b.data.order;
+  return a.data.title.zh.localeCompare(b.data.title.zh);
+};
+
+const current = all.filter((p) => p.data.category === 'current').sort(byOrder);
+const previous = all.filter((p) => p.data.category === 'previous').sort(byOrder);
+---
+
+<section class="hero">
+  <div class="container">
+    <p class="greeting">{t('hero.greeting')}</p>
+    <h1>{t('hero.name')}</h1>
+    <p class="tagline">{t('hero.tagline')}</p>
+    <p class="intro">{t('hero.intro')}</p>
+  </div>
+</section>
+
+<ProjectSection
+  id="current"
+  title={t('section.current.title')}
+  description={t('section.current.desc')}
+  projects={current}
+  lang={lang}
+/>
+
+<ProjectSection
+  id="previous"
+  title={t('section.previous.title')}
+  description={t('section.previous.desc')}
+  projects={previous}
+  lang={lang}
+/>
+
+<style>
+  .hero {
+    padding: 4.5rem 0 1rem;
+  }
+  .greeting {
+    margin: 0;
+    color: var(--text-subtle);
+    font-size: 1rem;
+    font-family: var(--font-serif);
+    font-style: italic;
+  }
+  .hero h1 {
+    margin: 0.25rem 0 0;
+    font-size: clamp(2.25rem, 6vw, 3.25rem);
+    letter-spacing: 0.01em;
+  }
+  .tagline {
+    margin: 0.5rem 0 1.25rem;
+    font-size: 1.1rem;
+    color: var(--accent);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .intro {
+    margin: 0;
+    max-width: 60ch;
+    color: var(--text-muted);
+  }
+</style>

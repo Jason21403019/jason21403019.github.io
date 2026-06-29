@@ -1,0 +1,126 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { useTranslations, type Lang } from '../i18n/ui';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+  lang: Lang;
+}
+
+const { project, lang } = Astro.props;
+const t = useTranslations(lang);
+const d = project.data;
+const key = lang === 'en' ? 'en' : 'zh';
+---
+
+<article class="card">
+  <div class="card-head">
+    <h3 class="card-title">{d.title[key]}</h3>
+    {d.period && <span class="period">{d.period}</span>}
+  </div>
+
+  <p class="summary">{d.summary[key]}</p>
+
+  {
+    d.role && (
+      <p class="role">
+        <span class="label">{t('card.role')}</span>
+        {d.role[key]}
+      </p>
+    )
+  }
+
+  {
+    d.tech.length > 0 && (
+      <ul class="tags" aria-label={t('card.tech')}>
+        {d.tech.map((item) => (
+          <li class="tag">{item}</li>
+        ))}
+      </ul>
+    )
+  }
+
+  {
+    d.links.length > 0 && (
+      <div class="links">
+        {d.links.map((link) => (
+          <a href={link.url} target="_blank" rel="noopener noreferrer">
+            {link.label} ↗
+          </a>
+        ))}
+      </div>
+    )
+  }
+</article>
+
+<style>
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+    transition:
+      transform 0.15s ease,
+      box-shadow 0.15s ease;
+    height: 100%;
+  }
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      0 2px 4px rgba(0, 0, 0, 0.05),
+      0 8px 24px rgba(0, 0, 0, 0.07);
+  }
+  .card-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+  }
+  .card-title {
+    margin: 0;
+    font-size: 1.15rem;
+    letter-spacing: -0.01em;
+  }
+  .period {
+    flex: none;
+    font-size: 0.8rem;
+    color: var(--text-subtle);
+    font-variant-numeric: tabular-nums;
+  }
+  .summary {
+    margin: 0 0 0.75rem;
+    color: var(--text-muted);
+  }
+  .role {
+    margin: 0 0 0.75rem;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+  }
+  .role .label {
+    color: var(--text-subtle);
+    margin-right: 0.4rem;
+  }
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    list-style: none;
+    margin: 0 0 1rem;
+    padding: 0;
+  }
+  .tag {
+    font-size: 0.78rem;
+    background: var(--tag-bg);
+    color: var(--text-muted);
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+  }
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    font-size: 0.9rem;
+  }
+</style>
