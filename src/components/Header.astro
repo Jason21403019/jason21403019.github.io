@@ -1,8 +1,8 @@
 ---
-import { useTranslations, languages, type Lang } from '../i18n/ui';
+import { useTranslations, languages, type Lang } from "../i18n/ui";
 
 interface Props {
-  lang: Lang;
+	lang: Lang;
 }
 
 const { lang } = Astro.props;
@@ -10,75 +10,73 @@ const t = useTranslations(lang);
 
 // 兩個語言版本的首頁路徑
 const paths: Record<Lang, string> = {
-  'zh-Hant': '/',
-  en: '/en/',
+	"zh-Hant": "/",
+	en: "/en/",
 };
 const homeHref = paths[lang];
 ---
 
 <header class="site-header">
-  <div class="container header-inner">
-    <a href={homeHref} class="brand">{t('site.name')}</a>
-    <nav class="lang-switch" aria-label="Language">
-      {
-        (Object.keys(languages) as Lang[]).map((code) => (
-          <a
-            href={paths[code]}
-            class:list={['lang-link', { active: code === lang }]}
-            aria-current={code === lang ? 'page' : undefined}
-          >
-            {languages[code]}
-          </a>
-        ))
-      }
-    </nav>
-  </div>
+	<div class="container header-inner">
+		<a href={homeHref} class="brand">{t("site.name")}</a>
+		<nav class="lang-switch" aria-label="Language">
+			{
+				(Object.keys(languages) as Lang[]).map((code) => (
+					<a
+						href={paths[code]}
+						class:list={["lang-link", { active: code === lang }]}
+						aria-current={code === lang ? "page" : undefined}>
+						{languages[code]}
+					</a>
+				))
+			}
+		</nav>
+	</div>
 </header>
 
 <style>
-  /* 老錢風：實心黑色橫幅，象牙白字，底部一道金色細線 */
-  .site-header {
-    background: var(--ink);
-    border-bottom: 1px solid var(--hairline);
-    position: sticky;
-    top: 0;
-    z-index: 10;
-  }
-  .header-inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 60px;
-  }
-  .brand {
-    font-family: var(--font-serif);
-    font-weight: 600;
-    font-size: 1.1rem;
-    color: var(--on-ink);
-    letter-spacing: 0.02em;
-  }
-  .brand:hover {
-    text-decoration: none;
-    color: var(--hairline);
-  }
-  .lang-switch {
-    display: flex;
-    gap: 0.25rem;
-    font-size: 0.875rem;
-  }
-  .lang-link {
-    color: color-mix(in srgb, var(--on-ink) 60%, transparent);
-    padding: 0.25rem 0.6rem;
-    border-radius: 999px;
-  }
-  .lang-link:hover {
-    text-decoration: none;
-    background: rgba(255, 255, 255, 0.1);
-    color: var(--on-ink);
-  }
-  .lang-link.active {
-    color: var(--ink);
-    background: var(--on-ink);
-    font-weight: 600;
-  }
+	.site-header {
+		background: var(--ink);
+		border-bottom: 1px solid var(--hairline);
+		position: sticky;
+		top: 0;
+		z-index: 10;
+	}
+	.header-inner {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		height: 60px;
+	}
+	.brand {
+		font-family: var(--font-serif);
+		font-weight: 600;
+		font-size: 1.1rem;
+		color: var(--on-ink);
+		letter-spacing: 0.02em;
+	}
+	.brand:hover {
+		text-decoration: none;
+		color: var(--hairline);
+	}
+	.lang-switch {
+		display: flex;
+		gap: 0.25rem;
+		font-size: 0.875rem;
+	}
+	.lang-link {
+		color: color-mix(in srgb, var(--on-ink) 60%, transparent);
+		padding: 0.25rem 0.6rem;
+		border-radius: 999px;
+	}
+	.lang-link:hover {
+		text-decoration: none;
+		background: rgba(255, 255, 255, 0.1);
+		color: var(--on-ink);
+	}
+	.lang-link.active {
+		color: var(--ink);
+		background: var(--on-ink);
+		font-weight: 600;
+	}
 </style>
