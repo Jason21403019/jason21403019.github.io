@@ -1,103 +1,121 @@
 :root {
-  /* 老錢風 · 藍白黑 — 淺色（象牙白底、深海軍藍、墨黑） */
-  --bg: #f4f2ec; /* 溫潤象牙白 */
-  --surface: #fbfaf6; /* 卡片近白 */
-  --border: #ddd8cb; /* 細緻米色邊線 */
-  --text: #11151c; /* 墨黑 */
-  --text-muted: #2f3a4a; /* 深藍灰 */
-  --text-subtle: #6a7280; /* 低調藍灰 */
-  --accent: #13294b; /* 海軍藍 */
-  --accent-soft: #e6e9f0; /* 淡藍底 */
-  --tag-bg: #eceadf; /* 米色標籤底 */
-  --hairline: #b99a5b; /* 內斂金色細節（極少量） */
-  --ink: #0a0b0d; /* 黑：頁首/頁尾的實心黑色橫幅 */
-  --on-ink: #f1efe7; /* 黑底上的象牙白字 */
-  --shadow: 0 1px 2px rgba(19, 41, 75, 0.05),
-    0 8px 28px rgba(19, 41, 75, 0.06);
+	/* ① 中性底色（白） */
+	--bg: #f4f2ec; /* 頁面底：象牙白 */
+	--border: #ddd8cb; /* 邊線、標籤底 */
 
-  --max-width: 880px;
-  --radius: 4px; /* 老錢風偏方正、收斂的圓角 */
-  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans TC',
-    'PingFang TC', 'Microsoft JhengHei', Roboto, Helvetica, Arial, sans-serif;
-  --font-serif: 'Georgia', 'Times New Roman', 'Noto Serif TC', 'Songti TC',
-    'PMingLiU', serif;
+	/* ② 文字（黑） */
+	--text: #11151c; /* 主要文字：墨黑 */
+	--text-muted: #51596b; /* 次要文字：簡介、角色、時間 */
+
+	/* ③ 品牌色（藍 + 一點金） */
+	--accent: #13294b; /* 海軍藍：連結、強調 */
+	--gold: #b99a5b; /* 金色：僅用於細線點綴 */
+
+	/* ④ 黑色橫幅（頁首／頁尾） */
+	--ink: #0a0b0d; /* 橫幅底：黑 */
+	--on-ink: #f1efe7; /* 橫幅上的字：象牙白 */
+
+	--shadow: 0 1px 2px rgba(19, 41, 75, 0.05), 0 8px 28px rgba(19, 41, 75, 0.06);
+
+	--max-width: 880px;
+	--radius: 4px;
+	--font-sans:
+		-apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", Roboto,
+		Helvetica, Arial, sans-serif;
+	--font-serif: "Georgia", "Times New Roman", "Noto Serif TC", "Songti TC", "PMingLiU", serif;
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #0a0b0d; /* 黑：深色模式以近黑為主調 */
-    --surface: #121a2c; /* 卡片帶海軍藍 */
-    --border: #243657;
-    --text: #f1efe7; /* 象牙白字 */
-    --text-muted: #c3cbd8;
-    --text-subtle: #8c97a8;
-    --accent: #c9d6ea; /* 淺藍（深底上的強調） */
-    --accent-soft: #1c2c4a;
-    --tag-bg: #1c2c4a;
-    --hairline: #c2a667;
-    --ink: #000000; /* 深色模式：頁首/頁尾純黑，與近黑底拉出層次 */
-    --on-ink: #f1efe7;
-    --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 28px rgba(0, 0, 0, 0.4);
-  }
+	:root {
+		/* 深色模式：同樣 8 個顏色，數值對調為深底淺字 */
+		--bg: #0a0b0d; /* 近黑為主調 */
+		--border: #243657;
+		--text: #f1efe7; /* 象牙白字 */
+		--text-muted: #aab2c0; /* 次要文字 */
+		--accent: #c9d6ea; /* 淺藍（深底上的強調） */
+		--gold: #c2a667;
+		--ink: #000000; /* 橫幅純黑，與近黑底拉出層次 */
+		--on-ink: #f1efe7;
+		--shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 28px rgba(0, 0, 0, 0.4);
+	}
 }
 
 * {
-  box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 html {
-  scroll-behavior: smooth;
+	/* 未啟用 Lenis 時（例如開啟減少動態效果）的後備平滑滾動 */
+	scroll-behavior: smooth;
+}
+
+/* Lenis 平滑滾動所需樣式 */
+html.lenis,
+html.lenis body {
+	height: auto;
+}
+.lenis.lenis-smooth {
+	scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+	overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+	overflow: clip;
+}
+.lenis.lenis-smooth iframe {
+	pointer-events: none;
 }
 
 body {
-  margin: 0;
-  background: var(--bg);
-  color: var(--text);
-  font-family: var(--font-sans);
-  line-height: 1.65;
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
+	margin: 0;
+	background: var(--bg);
+	color: var(--text);
+	font-family: var(--font-sans);
+	line-height: 1.65;
+	-webkit-font-smoothing: antialiased;
+	text-rendering: optimizeLegibility;
 }
 
 /* 老錢風：標題用襯線字體，沉穩、經典 */
 h1,
 h2,
 h3 {
-  font-family: var(--font-serif);
-  font-weight: 600;
-  letter-spacing: 0.01em;
+	font-family: var(--font-serif);
+	font-weight: 600;
+	letter-spacing: 0.01em;
 }
 
 a {
-  color: var(--accent);
-  text-decoration: none;
+	color: var(--accent);
+	text-decoration: none;
 }
 a:hover {
-  text-decoration: underline;
+	text-decoration: underline;
 }
 
 .container {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 0 1.25rem;
+	max-width: var(--max-width);
+	margin: 0 auto;
+	padding: 0 1.25rem;
 }
 
 .skip-link {
-  position: absolute;
-  left: -999px;
-  top: 0;
-  background: var(--accent);
-  color: #fff;
-  padding: 0.5rem 1rem;
-  border-radius: 0 0 var(--radius) 0;
-  z-index: 100;
+	position: absolute;
+	left: -999px;
+	top: 0;
+	background: var(--accent);
+	color: #fff;
+	padding: 0.5rem 1rem;
+	border-radius: 0 0 var(--radius) 0;
+	z-index: 100;
 }
 .skip-link:focus {
-  left: 0;
+	left: 0;
 }
 
 :focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
-  border-radius: 4px;
+	outline: 2px solid var(--accent);
+	outline-offset: 2px;
+	border-radius: 4px;
 }

@@ -6,10 +6,7 @@ summary:
   zh: 轉職進入軟體開發之前的作品，可以是任何領域的成果。
   en: Work completed before moving into software; can be from any field.
 category: previous
-role:
-  zh: 製作 / 負責人
-  en: Creator / Owner
-period: '2020'
+period: "2020"
 tech:
   - 你想標的領域或工具
 links: []

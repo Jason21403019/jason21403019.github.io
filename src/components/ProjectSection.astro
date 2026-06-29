@@ -13,9 +13,19 @@ interface Props {
 
 const { id, title, description, projects, lang } = Astro.props;
 const t = useTranslations(lang);
+
+// 每頁顯示幾張卡片。超過這個數量才會出現頁籤。
+const PAGE_SIZE = 4;
+const needsPager = projects.length > PAGE_SIZE;
 ---
 
-<section class="section" id={id} aria-labelledby={`${id}-title`}>
+<section
+	class="section"
+	id={id}
+	aria-labelledby={`${id}-title`}
+	data-paginate={needsPager ? "" : undefined}
+	data-page-size={PAGE_SIZE}
+>
 	<div class="container">
 		<header class="section-head">
 			<h2 id={`${id}-title`}>{title}</h2>
@@ -31,6 +41,12 @@ const t = useTranslations(lang);
 				</div>
 			) : (
 				<p class="empty">{t("card.empty")}</p>
+			)
+		}
+
+		{
+			needsPager && (
+				<nav class="pager" aria-label={lang === "en" ? "Pagination" : "分頁"} />
 			)
 		}
 	</div>
@@ -57,11 +73,11 @@ const t = useTranslations(lang);
 		bottom: -1px;
 		width: 44px;
 		height: 2px;
-		background: var(--hairline);
+		background: var(--gold);
 	}
 	.section-desc {
 		margin: 0;
-		color: var(--text-subtle);
+		color: var(--text-muted);
 	}
 	.grid {
 		display: grid;
@@ -69,10 +85,102 @@ const t = useTranslations(lang);
 		gap: 1.25rem;
 	}
 	.empty {
-		color: var(--text-subtle);
+		color: var(--text-muted);
 		border: 1px dashed var(--border);
 		border-radius: var(--radius);
 		padding: 1.5rem;
 		text-align: center;
 	}
+
+	/* 分頁頁籤 */
+	.pager {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.4rem;
+		justify-content: center;
+		margin-top: 2rem;
+	}
+	.pager button {
+		font: inherit;
+		min-width: 2.25rem;
+		height: 2.25rem;
+		padding: 0 0.6rem;
+		border: 1px solid var(--border);
+		background: transparent;
+		color: var(--text-muted);
+		border-radius: var(--radius);
+		cursor: pointer;
+		transition:
+			border-color 0.15s ease,
+			color 0.15s ease;
+	}
+	.pager button:hover {
+		border-color: var(--accent);
+		color: var(--text);
+	}
+	.pager button.active {
+		background: var(--accent);
+		border-color: var(--accent);
+		color: var(--bg);
+		font-weight: 600;
+	}
 </style>
+
+<script>
+	// 客戶端分頁：把每個 [data-paginate] 區塊的卡片切成數頁，一次只顯示一頁。
+	const DEFAULT_SIZE = 4;
+
+	function setupPagination() {
+		const sections =
+			document.querySelectorAll<HTMLElement>("section[data-paginate]");
+
+		sections.forEach((section) => {
+			const grid = section.querySelector(".grid");
+			const pager = section.querySelector<HTMLElement>(".pager");
+			if (!grid || !pager || pager.dataset.ready === "1") return;
+
+			const cards = Array.from(grid.children) as HTMLElement[];
+			const size = Number(section.dataset.pageSize) || DEFAULT_SIZE;
+			const pageCount = Math.ceil(cards.length / size);
+			if (pageCount <= 1) return;
+
+			let current = 1;
+
+			const render = () => {
+				cards.forEach((card, i) => {
+					card.hidden = Math.floor(i / size) + 1 !== current;
+				});
+				pager.querySelectorAll("button").forEach((btn, idx) => {
+					const active = idx + 1 === current;
+					btn.classList.toggle("active", active);
+					btn.setAttribute("aria-current", active ? "page" : "false");
+				});
+			};
+
+			for (let p = 1; p <= pageCount; p++) {
+				const btn = document.createElement("button");
+				btn.type = "button";
+				btn.textContent = String(p);
+				btn.addEventListener("click", () => {
+					if (current === p) return;
+					current = p;
+					render();
+					// 換頁後捲回該區塊標題（沿用 Lenis，沒有就用原生）
+					const top =
+						section.getBoundingClientRect().top + window.scrollY - 70;
+					const lenis = (window as any).lenis;
+					if (lenis) lenis.scrollTo(top);
+					else window.scrollTo({ top, behavior: "smooth" });
+				});
+				pager.appendChild(btn);
+			}
+
+			pager.dataset.ready = "1";
+			render();
+		});
+	}
+
+	setupPagination();
+	// Astro 的 View Transitions（若日後啟用）換頁後重新初始化
+	document.addEventListener("astro:page-load", setupPagination);
+</script>

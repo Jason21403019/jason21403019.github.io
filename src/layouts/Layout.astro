@@ -30,5 +30,26 @@ const htmlLang = lang === 'zh-Hant' ? 'zh-Hant' : 'en';
       <slot />
     </main>
     <Footer lang={lang} />
+
+    <script>
+      import Lenis from 'lenis';
+
+      // 尊重「減少動態效果」的系統設定：開啟者不啟用平滑滾動
+      const reduceMotion = window.matchMedia(
+        '(prefers-reduced-motion: reduce)'
+      ).matches;
+
+      if (!reduceMotion) {
+        const lenis = new Lenis();
+        // 讓分頁等其他腳本能取用同一個 Lenis 實例
+        (window as any).lenis = lenis;
+
+        function raf(time: number) {
+          lenis.raf(time);
+          requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+      }
+    </script>
   </body>
 </html>

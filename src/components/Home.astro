@@ -25,9 +25,7 @@ const previous = all.filter((p) => p.data.category === 'previous').sort(byOrder)
 
 <section class="hero">
   <div class="container">
-    <p class="greeting">{t('hero.greeting')}</p>
     <h1>{t('hero.name')}</h1>
-    <p class="tagline">{t('hero.tagline')}</p>
     <p class="intro">{t('hero.intro')}</p>
   </div>
 </section>
@@ -52,29 +50,15 @@ const previous = all.filter((p) => p.data.category === 'previous').sort(byOrder)
   .hero {
     padding: 4.5rem 0 1rem;
   }
-  .greeting {
-    margin: 0;
-    color: var(--text-subtle);
-    font-size: 1rem;
-    font-family: var(--font-serif);
-    font-style: italic;
-  }
   .hero h1 {
-    margin: 0.25rem 0 0;
+    margin: 0 0 1rem;
     font-size: clamp(2.25rem, 6vw, 3.25rem);
     letter-spacing: 0.01em;
-  }
-  .tagline {
-    margin: 0.5rem 0 1.25rem;
-    font-size: 1.1rem;
-    color: var(--accent);
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
   }
   .intro {
     margin: 0;
     max-width: 60ch;
     color: var(--text-muted);
+    font-size: 1.05rem;
   }
 </style>

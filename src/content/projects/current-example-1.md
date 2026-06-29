@@ -6,9 +6,6 @@ summary:
   zh: 用一兩句話說明這個專案在做什麼、解決了什麼問題。
   en: One or two sentences on what this project does and the problem it solves.
 category: current
-role:
-  zh: 主開發
-  en: Lead Developer
 period: 2024 – 現在
 tech:
   - TypeScript

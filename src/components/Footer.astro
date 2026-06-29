@@ -1,8 +1,8 @@
 ---
-import { useTranslations, type Lang } from '../i18n/ui';
+import { useTranslations, type Lang } from "../i18n/ui";
 
 interface Props {
-  lang: Lang;
+	lang: Lang;
 }
 
 const { lang } = Astro.props;
@@ -11,22 +11,22 @@ const year = new Date().getFullYear();
 ---
 
 <footer class="site-footer">
-  <div class="container">
-    <p>© {year} {t('hero.name')} · {t('footer.builtWith')}</p>
-  </div>
+	<div class="container">
+		<p>© {year} {t("footer.madeBy")}</p>
+	</div>
 </footer>
 
 <style>
-  /* 老錢風：與頁首呼應的實心黑色橫幅 */
-  .site-footer {
-    background: var(--ink);
-    border-top: 1px solid var(--hairline);
-    margin-top: 4rem;
-    padding: 2rem 0;
-    color: color-mix(in srgb, var(--on-ink) 70%, transparent);
-    font-size: 0.875rem;
-  }
-  .site-footer p {
-    margin: 0;
-  }
+	/* 老錢風：與頁首呼應的實心黑色橫幅 */
+	.site-footer {
+		background: var(--ink);
+		border-top: 1px solid var(--gold);
+		margin-top: 4rem;
+		padding: 2rem 0;
+		color: color-mix(in srgb, var(--on-ink) 70%, transparent);
+		font-size: 0.875rem;
+	}
+	.site-footer p {
+		margin: 0;
+	}
 </style>

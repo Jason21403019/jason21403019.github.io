@@ -6,9 +6,6 @@ summary:
   zh: 另一個現職期間維護的專案，可說明你負責的部分與成果。
   en: Another project maintained in your current role; describe your part and impact.
 category: current
-role:
-  zh: 維護 / 後端
-  en: Maintainer / Backend
 period: 2023 – 2024
 tech:
   - Python

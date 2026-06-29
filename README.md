@@ -24,7 +24,6 @@ npm run preview  # 預覽 build 結果
 | `title`    | 專案名稱，需有 `zh` 與 `en`                           |
 | `summary`  | 卡片上的一句話簡介，需有 `zh` 與 `en`                 |
 | `category` | `current`（現職）或 `previous`（轉職前）              |
-| `role`     | 你的角色（選填），有 `zh` / `en`                      |
 | `period`   | 時間區間（選填），例如 `2023 – 2024`                  |
 | `tech`     | 技術標籤陣列（選填）                                  |
 | `links`    | 連結陣列 `{ label, url }`（選填）                     |
