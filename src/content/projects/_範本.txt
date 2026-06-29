@@ -1,0 +1,32 @@
+# 新增卡片範本
+#
+# 用法：
+# 1. 複製這個檔，改副檔名為 .md（例如 my-project.md），放在這個資料夾裡。
+# 2. 把下面 --- 之間的內容填好。
+# 3. 存檔。dev server 會自動刷新；要上線就 git push。
+#
+# （這個檔副檔名是 .txt，所以不會被當成卡片，只是給你參考複製用。）
+
+---
+# ── 必填 ──
+title:
+  zh: 專案中文名稱
+  en: Project English Name
+summary:
+  zh: 一句話說明這個專案在做什麼。
+  en: One sentence describing what this project does.
+category: current        # current = 現職作品；previous = 轉職前作品（決定放哪一區）
+
+# ── 選填，不需要就整行刪掉 ──
+period: "2024 – 現在"     # 時間區間。純數字一定要加引號，例如 "2020"
+tech:                     # 技術標籤，想列幾個列幾個
+  - TypeScript
+  - React
+links:                    # 相關連結，url 必須是完整網址（含 https://）
+  - label: GitHub
+    url: https://github.com/帳號/repo
+  - label: Demo
+    url: https://example.com
+featured: false           # 設 true 會排到該區最前面
+order: 100                # 數字越小越前面（featured 相同時）
+---
